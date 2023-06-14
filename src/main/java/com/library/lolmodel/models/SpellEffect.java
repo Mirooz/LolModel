@@ -14,6 +14,13 @@ public class SpellEffect {
     @Column(name = "champion_name")
     private String championName;
 
+    @OneToMany(mappedBy = "spellEffect",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<SpellCost> spellCostList;
+
+    @OneToMany(mappedBy = "spellEffect",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<SpellCooldown> spellCooldownList;
+
+    //delete ces 2 listes
     @Transient
     List<SpellCost> costList = new ArrayList<>();
     @Transient
@@ -81,11 +88,12 @@ public class SpellEffect {
         SpellEffect that = (SpellEffect) o;
         return Objects.equals(championName, that.championName) && Objects.equals(letter, that.letter) && Objects.equals(description, that.description) && Objects.equals(range, that.range) && Objects.equals(name, that.name);
     }
-
     @Override
     public String toString() {
         return "SpellEffect{" +
                 "championName='" + championName + '\'' +
+                ", spellCostList=" + spellCostList +
+                ", spellCooldownList=" + spellCooldownList +
                 ", letter='" + letter + '\'' +
                 ", description='" + description + '\'' +
                 ", range='" + range + '\'' +
@@ -93,14 +101,15 @@ public class SpellEffect {
                 '}';
     }
 
+    public void addCost(SpellCost cost) {
+        costList.add(cost);
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(championName, letter, description, range, name);
     }
 
-    public void addCost(SpellCost cost) {
-        costList.add(cost);
-    }
 
     public void addSpellCooldown(SpellCooldown cooldown) {
         cooldownList.add(cooldown);
@@ -111,5 +120,21 @@ public class SpellEffect {
     }
     public List<SpellCost> getSpellCost() {
         return this.costList;
+    }
+
+    public List<SpellCost> getSpellCostList() {
+        return spellCostList;
+    }
+
+    public void setSpellCostList(List<SpellCost> spellCostList) {
+        this.spellCostList = spellCostList;
+    }
+
+    public List<SpellCooldown> getSpellCooldownList() {
+        return spellCooldownList;
+    }
+
+    public void setSpellCooldownList(List<SpellCooldown> spellCooldownList) {
+        this.spellCooldownList = spellCooldownList;
     }
 }

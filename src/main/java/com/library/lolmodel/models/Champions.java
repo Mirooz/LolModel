@@ -41,7 +41,7 @@ public class Champions {
                 ", lore='" + lore + '\'' +
                 ", blurb='" + blurb + '\'' +
                 ", partype='" + partype + '\'' +
-                ", imageId=" + imageId +
+                ", image=" + image +
                 ", allytips=" + allytips +
                 ", enemytips=" + enemytips +
                 ", tags=" + tags +
@@ -112,18 +112,17 @@ public class Champions {
         this.partype = partype;
     }
 
-    @Basic
-    @Column(name = "image_id")
-    private Integer imageId;
+    @ManyToOne
+    @JoinColumn(name = "image_id")
+    private Image image;
 
-    public Integer getImageId() {
-        return imageId;
+    public Image getImage() {
+        return image;
     }
 
-    public void setImageId(Integer imageId) {
-        this.imageId = imageId;
+    public void setImage(Image image) {
+        this.image = image;
     }
-
     @Basic
     @Column(name = "allytips")
     private Object allytips;
@@ -213,11 +212,11 @@ public class Champions {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Champions champions = (Champions) o;
-        return Objects.equals(id, champions.id) && Objects.equals(key, champions.key) && Objects.equals(name, champions.name) && Objects.equals(title, champions.title) && Objects.equals(lore, champions.lore) && Objects.equals(blurb, champions.blurb) && Objects.equals(partype, champions.partype) && Objects.equals(imageId, champions.imageId) && Objects.equals(allytips, champions.allytips) && Objects.equals(enemytips, champions.enemytips) && Objects.equals(tags, champions.tags) && Objects.equals(infoDefense, champions.infoDefense) && Objects.equals(infoMagic, champions.infoMagic) && Objects.equals(infoDifficulty, champions.infoDifficulty) && Objects.equals(infoAttack, champions.infoAttack);
+        return Objects.equals(id, champions.id) && Objects.equals(key, champions.key) && Objects.equals(name, champions.name) && Objects.equals(title, champions.title) && Objects.equals(lore, champions.lore) && Objects.equals(blurb, champions.blurb) && Objects.equals(partype, champions.partype) && Objects.equals(image, champions.image) && Objects.equals(allytips, champions.allytips) && Objects.equals(enemytips, champions.enemytips) && Objects.equals(tags, champions.tags) && Objects.equals(infoDefense, champions.infoDefense) && Objects.equals(infoMagic, champions.infoMagic) && Objects.equals(infoDifficulty, champions.infoDifficulty) && Objects.equals(infoAttack, champions.infoAttack);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, key, name, title, lore, blurb, partype, imageId, allytips, enemytips, tags, infoDefense, infoMagic, infoDifficulty, infoAttack);
+        return Objects.hash(id, key, name, title, lore, blurb, partype, image, allytips, enemytips, tags, infoDefense, infoMagic, infoDifficulty, infoAttack);
     }
 }

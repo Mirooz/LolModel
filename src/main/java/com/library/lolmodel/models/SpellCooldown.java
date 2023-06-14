@@ -12,7 +12,12 @@ public class SpellCooldown {
     @Id
     @Column(name = "level")
     private int level;
-
+    @ManyToOne
+    @JoinColumns({
+            @JoinColumn(updatable=false,insertable=false,name = "champion_name",referencedColumnName = "champion_name"),
+            @JoinColumn(updatable=false,insertable=false,name = "letter", referencedColumnName = "letter")
+    })
+    private SpellEffect spellEffect;
     public SpellCooldown(int level, String championName, String letter, Double value) {
         this.level = level;
         this.championName = championName;

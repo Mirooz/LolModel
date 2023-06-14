@@ -12,6 +12,12 @@ public class SpellCost {
     @Column(name = "level")
     private int level;
 
+    @ManyToOne
+    @JoinColumns({
+            @JoinColumn(updatable=false,insertable=false,name = "champion_name",referencedColumnName = "champion_name"),
+            @JoinColumn(updatable=false,insertable=false,name = "letter", referencedColumnName = "letter")
+    })
+    private SpellEffect spellEffect;
     public SpellCost() {
 
     }
